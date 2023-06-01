@@ -119,6 +119,13 @@ impl Writer {
     }
 }
 
+impl core::fmt::Write for Writer {
+    fn write_str(&mut self, s: &str) -> core::fmt::Result {
+        self.write_string(s);
+        Ok(())
+    }
+}
+
 pub fn print_test() {
     let mut writer = Writer {
         column_position: 0,
@@ -134,4 +141,7 @@ pub fn print_test() {
       (  /  )    
        \\(__)|    ",
     );
+
+    use core::fmt::Write;
+    write!(writer, "1 + 2 = {}", 1 + 2).unwrap();
 }
